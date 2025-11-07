@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-900">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <!-- This line loads Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="h-full font-sans text-gray-200">
+    <div class="min-h-full">
+        <!-- Main Navigation Bar -->
+        <nav class="bg-gray-800">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <!-- You can put a logo here later -->
+                            <span class="font-bold text-white text-xl">Detector</span>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="ml-10 flex items-baseline space-x-4">
+                                <!-- Navigation links -->
+                                <a href="/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                                
+                                <!-- Links that change based on login status -->
+                                {% if user.is_authenticated %}
+                                    <a href="/admin/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Admin</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-4 flex items-center md:ml-6">
+                            {% if user.is_authenticated %}
+                                <!-- Show Logout button if user is logged in -->
+                                <span class="text-gray-300 px-3 py-2 text-sm font-medium">Hello, {{ user.username }}</span>
+                                <a href="{% url 'logout' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</a>
+                            {% else %}
+                                <!-- Show Login/Register if user is logged out -->
+                                <a href="{% url 'login' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log In</a>
+                                <a href="{% url 'register' %}" class="ml-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md px-3 py-2 text-sm font-medium">Register</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <header class="bg-gray-900 shadow">
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <!-- This 'block' is like a variable for the page title -->
+                <h1 class="text-3xl font-bold tracking-tight text-white">{% block title %}Dashboard{% endblock %}</h1>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main>
+            <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+                <!-- This block is where our other pages will "inject" their content -->
+                {% block content %}
+                    <!-- Default content goes here, will be replaced by other pages -->
+                    <p>Welcome to the dashboard!</p>
+                {% endblock %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>
