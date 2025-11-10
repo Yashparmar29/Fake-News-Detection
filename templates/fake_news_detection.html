@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Fake News Detection{% endblock %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+    }
+    .container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .form-control {
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 10px;
+    }
+    .btn-primary {
+        background: linear-gradient(45deg, #ff6b6b, #feca57);
+        border: none;
+        border-radius: 25px;
+        padding: 10px 30px;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+    .btn-primary:hover {
+        transform: scale(1.05);
+        background: linear-gradient(45deg, #feca57, #ff6b6b);
+    }
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 15px;
+        color: #fff;
+    }
+</style>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Fake News Detector</h1>
+    <p class="text-center mb-5">Paste the news article text below to check if it's real or fake.</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="news_text">News Article Text</label>
+                        <textarea class="form-control" id="news_text" name="news_text" rows="10" placeholder="Paste your news article here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Analyze News</button>
+                </form>
+                <div id="news_result" class="mt-4">
+                    <h5>Result:</h5>
+                    <p>{{ result|default:"Analysis results will appear here..." }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

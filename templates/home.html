@@ -16,18 +16,14 @@
         color: #fff;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-    .form-control {
-        background: rgba(255, 255, 255, 0.9);
-        border: none;
-        border-radius: 10px;
-    }
     .btn-primary {
         background: linear-gradient(45deg, #ff6b6b, #feca57);
         border: none;
         border-radius: 25px;
-        padding: 10px 30px;
+        padding: 15px 30px;
         font-weight: bold;
         transition: transform 0.3s ease;
+        margin: 10px;
     }
     .btn-primary:hover {
         transform: scale(1.05);
@@ -38,54 +34,27 @@
         border: none;
         border-radius: 15px;
         color: #fff;
-    }
-    hr {
-        border-color: rgba(255, 255, 255, 0.3);
+        text-align: center;
+        padding: 20px;
     }
 </style>
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Fake News Detector</h1>
-    <p class="text-center mb-5">Paste the news article text below to check if it's real or fake.</p>
+    <h1 class="text-center mb-4">Welcome to Fake News Detector</h1>
+    <p class="text-center mb-5">Choose a detection service below:</p>
 
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card p-4 mb-4">
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <div class="form-group mb-3">
-                        <label for="news_text">News Article Text</label>
-                        <textarea class="form-control" id="news_text" name="news_text" rows="10" placeholder="Paste your news article here..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Analyze News</button>
-                </form>
-                <div id="news_result" class="mt-4">
-                    <h5>Result:</h5>
-                    <p>{{ result|default:"Analysis results will appear here..." }}</p>
-                </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Fake News Detection</h3>
+                <p>Analyze news articles to determine if they are real or fake.</p>
+                <a href="{% url 'fake_news_detection' %}" class="btn btn-primary">Go to Fake News Detection</a>
             </div>
         </div>
-    </div>
-
-    <hr class="my-5">
-
-    <h1 class="text-center mb-4">Spam Email Detector</h1>
-    <p class="text-center mb-5">Paste the full email content below to check if it's spam.</p>
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card p-4">
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <div class="form-group mb-3">
-                        <label for="email_content">Email Content</label>
-                        <textarea class="form-control" id="email_content" name="email_content" rows="10" placeholder="Paste your email content here..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Analyze Email</button>
-                </form>
-                <div id="email_result" class="mt-4">
-                    <h5>Result:</h5>
-                    <p>Analysis results will appear here...</p>
-                </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Email Spam Detection</h3>
+                <p>Check if an email is spam or legitimate.</p>
+                <a href="{% url 'email_spam_detection' %}" class="btn btn-primary">Go to Email Spam Detection</a>
             </div>
         </div>
     </div>
