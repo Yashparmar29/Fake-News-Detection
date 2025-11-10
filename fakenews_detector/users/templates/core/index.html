@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+<!-- Change the page title block -->
+{% block title %}Dashboard{% endblock %}
+
+<!-- Fill the main content block -->
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    
+    <!-- Column 1: Fake News Detector -->
+    <div class="bg-gray-800 shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-white mb-4">Fake News Detector</h2>
+        <p class="text-gray-400 mb-6">Paste the news article text below to check if it's real or fake.</p>
+        
+        <!-- Fake News Form -->
+        <!-- We will add the 'action' URL in a later step -->
+        <form method="POST" action="" class="space-y-4">
+            <!-- Django security token -->
+            {% csrf_token %}
+            
+            <div>
+                <label for="news_text" class="block text-sm font-medium leading-6 text-white">News Article Text</label>
+                <div class="mt-2">
+                    <textarea id="news_text" name="news_text" rows="10" class="block w-full rounded-md border-0 py-1.5 px-3 bg-gray-700 text-white shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"></textarea>
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Analyze News
+                </button>
+            </div>
+        </form>
+
+        <!-- Result section (will be hidden until we add the logic) -->
+        <div class="mt-6">
+            <h3 class="text-lg font-medium text-white">Result:</h3>
+            <div class="mt-2 p-4 rounded-md bg-gray-700">
+                <p class="text-gray-300">Analysis results will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Column 2: Spam Email Detector -->
+    <div class="bg-gray-800 shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-white mb-4">Spam Email Detector</h2>
+        <p class="text-gray-400 mb-6">Paste the full email content below to check if it's spam.</p>
+        
+        <!-- Spam Email Form -->
+        <!-- We will add the 'action' URL in a later step -->
+        <form method="POST" action="" class="space-y-4">
+            <!-- Django security token -->
+            {% csrf_token %}
+            
+            <div>
+                <label for="email_text" class="block text-sm font-medium leading-6 text-white">Email Content</label>
+                <div class="mt-2">
+                    <textarea id="email_text" name="email_text" rows="10" class="block w-full rounded-md border-0 py-1.5 px-3 bg-gray-700 text-white shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"></textarea>
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
+                    Analyze Email
+                </button>
+            </div>
+        </form>
+
+        <!-- Result section (will be hidden until we add the logic) -->
+        <div class="mt-6">
+            <h3 class="text-lg font-medium text-white">Result:</h3>
+            <div class="mt-2 p-4 rounded-md bg-gray-700">
+                <p class="text-gray-300">Analysis results will appear here...</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
