@@ -1,7 +1,6 @@
-# TODO: Add Separate Detection Pages to Home Page
+# TODO: Integrate Fake News Detection Model
 
-- [x] Add new views in core/views.py: fake_news_detection and email_spam_detection
-- [x] Create templates/fake_news_detection.html
-- [x] Create templates/email_spam_detection.html
-- [x] Update core/urls.py to add URL patterns for new views
-- [x] Update templates/home.html to remove forms and add links to new pages
+- [x] Create requirements.txt with dependencies (transformers, torch)
+- [x] Edit core/views.py to import libraries, load model pipeline, and update fake_news_detection view for prediction
+- [x] Install dependencies using pip install -r requirements.txt (completed)
+- [ ] Test the application by running Django server and submitting news text

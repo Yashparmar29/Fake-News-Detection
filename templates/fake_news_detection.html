@@ -3,62 +3,112 @@
 {% block content %}
 <style>
     body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
         color: #fff;
+        font-family: 'Arial', sans-serif;
     }
     .container {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     h1 {
         color: #fff;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+    p {
+        font-size: 1.2em;
+        opacity: 0.9;
     }
     .form-control {
-        background: rgba(255, 255, 255, 0.9);
-        border: none;
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        color: #333;
+        font-size: 1em;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .form-control:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
     }
     .btn-primary {
-        background: linear-gradient(45deg, #ff6b6b, #feca57);
+        background: linear-gradient(45deg, #ff4757, #ff3838);
         border: none;
-        border-radius: 25px;
-        padding: 10px 30px;
+        border-radius: 30px;
+        padding: 15px 40px;
         font-weight: bold;
-        transition: transform 0.3s ease;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
     }
     .btn-primary:hover {
-        transform: scale(1.05);
-        background: linear-gradient(45deg, #feca57, #ff6b6b);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+        background: linear-gradient(45deg, #ff3838, #ff4757);
     }
     .card {
         background: rgba(255, 255, 255, 0.1);
-        border: none;
-        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
         color: #fff;
+        padding: 30px;
+    }
+    .result {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 15px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.2em;
+    }
+    .real {
+        background: linear-gradient(45deg, #2ed573, #1e90ff);
+        color: #fff;
+    }
+    .fake {
+        background: linear-gradient(45deg, #ff4757, #ff3838);
+        color: #fff;
+    }
+    .icon {
+        font-size: 2em;
+        margin-bottom: 10px;
     }
 </style>
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Fake News Detector</h1>
-    <p class="text-center mb-5">Paste the news article text below to check if it's real or fake.</p>
+    <h1 class="text-center mb-4">📰 Fake News Detector</h1>
+    <p class="text-center mb-5">Paste the news article text below to check if it's real or fake using advanced AI analysis.</p>
 
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card p-4">
+        <div class="col-md-10">
+            <div class="card">
                 <form method="post" action="">
                     {% csrf_token %}
-                    <div class="form-group mb-3">
-                        <label for="news_text">News Article Text</label>
-                        <textarea class="form-control" id="news_text" name="news_text" rows="10" placeholder="Paste your news article here..." required></textarea>
+                    <div class="form-group mb-4">
+                        <label for="news_text" class="form-label fw-bold">News Article Text</label>
+                        <textarea class="form-control" id="news_text" name="news_text" rows="12" placeholder="Paste your news article here..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Analyze News</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">🔍 Analyze News</button>
+                    </div>
                 </form>
-                <div id="news_result" class="mt-4">
-                    <h5>Result:</h5>
-                    <p>{{ result|default:"Analysis results will appear here..." }}</p>
+                {% if result %}
+                <div class="result mt-4 {% if 'Real' in result %}real{% else %}fake{% endif %}">
+                    <div class="icon">{% if 'Real' in result %}✅{% else %}❌{% endif %}</div>
+                    <div>{{ result }}</div>
                 </div>
+                {% else %}
+                <div class="result mt-4" style="background: rgba(255, 255, 255, 0.1);">
+                    <div class="icon">⏳</div>
+                    <div>Analysis results will appear here...</div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

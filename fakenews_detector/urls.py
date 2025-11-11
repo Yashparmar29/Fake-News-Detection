@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('fakenews_detector.users.urls')),
+    path('', include('fakenews_detector.users.urls')),
     path('', include('core.urls')),
 ]

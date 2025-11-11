@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            font-size: 1em;
+            color: #333;
+            background: rgba(255, 255, 255, 0.9);
+            resize: vertical;
+            outline: none;
+        }
+        textarea::placeholder {
+            color: #666;
+        }
+        button {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .result {
+            margin-top: 30px;
+            display: none;
+        }
+        .result-card {
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .real {
+            background: linear-gradient(45deg, #4caf50, #81c784);
+            color: #fff;
+        }
+        .fake {
+            background: linear-gradient(45deg, #f44336, #e57373);
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            textarea {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fake News Detector</h1>
+        <p>Paste the news article text below to check if it's real or fake.</p>
+        <textarea id="news_text" placeholder="Paste your news article here..."></textarea>
+        <button onclick="analyzeNews()">Analyze News</button>
+        <div id="result" class="result">
+            <div id="result-card" class="result-card"></div>
+        </div>
+    </div>
+
+    <script>
+        function analyzeNews() {
+            const text = document.getElementById('news_text').value.trim();
+            const resultDiv = document.getElementById('result');
+            const resultCard = document.getElementById('result-card');
+
+            if (!text) {
+                alert('Please enter some text to analyze.');
+                return;
+            }
+
+            // Simple logic to simulate model-based detection
+            // In a real scenario, this would call an API or use a trained model
+            // For demo: Check for sensational keywords often in fake news
+            const fakeKeywords = ['breaking', 'shocking', 'exclusive', 'unbelievable', 'conspiracy', 'hoax'];
+            const realKeywords = ['official', 'confirmed', 'source', 'report', 'statement'];
+
+            let fakeScore = 0;
+            let realScore = 0;
+
+            const lowerText = text.toLowerCase();
+            fakeKeywords.forEach(keyword => {
+                if (lowerText.includes(keyword)) fakeScore++;
+            });
+            realKeywords.forEach(keyword => {
+                if (lowerText.includes(keyword)) realScore++;
+            });
+
+            // If more fake keywords or text is short/sensational, mark as fake
+            // Otherwise, real
+            const isFake = fakeScore > realScore || (text.length < 100 && fakeScore > 0);
+
+            resultCard.className = 'result-card ' + (isFake ? 'fake' : 'real');
+            resultCard.innerHTML = isFake ? '❌ Fake News' : '✅ Real News';
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

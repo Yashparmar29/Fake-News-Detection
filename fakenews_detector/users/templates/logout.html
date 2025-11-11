@@ -5,14 +5,63 @@
 
 <!-- Fill the main content block -->
 {% block content %}
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md p-8 bg-gray-800 shadow-lg rounded-lg">
-        <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-white">
-            You have been logged out.
-        </h2>
-        <p class="mt-10 text-center text-sm text-gray-400">
-            <a href="{% url 'login' %}" class="font-semibold leading-6 text-indigo-400 hover:text-indigo-300">Log in again</a>
-        </p>
-    </div>
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        font-family: 'Arial', sans-serif;
+    }
+    .logout-container {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        max-width: 500px;
+        margin: 50px auto;
+        text-align: center;
+    }
+    h2 {
+        color: #fff;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 1.1em;
+        opacity: 0.9;
+        margin-bottom: 30px;
+    }
+    .btn-login {
+        background: linear-gradient(45deg, #4facfe, #00f2fe);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-weight: bold;
+        font-size: 1em;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+    }
+    .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+        background: linear-gradient(45deg, #00f2fe, #4facfe);
+    }
+    .icon {
+        font-size: 3em;
+        margin-bottom: 20px;
+        opacity: 0.8;
+    }
+</style>
+<div class="logout-container">
+    <div class="icon">👋</div>
+    <h2>You have been logged out successfully.</h2>
+    <p>Thank you for using Fake News Detector. We hope to see you again soon!</p>
+    <a href="{% url 'login' %}" class="btn-login">🔑 Log in again</a>
 </div>
 {% endblock %}
