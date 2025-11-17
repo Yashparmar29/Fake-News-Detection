@@ -1,2 +1,9 @@
 transformers==4.21.0
 torch>=2.0.0
+Pillow>=9.0.0
+Faker>=15.0.0
+datasets>=2.0.0
+scikit-learn>=1.0.0
+requests>=2.25.0
+django-admin-interface==0.31.0
+django-colorfield==0.14.0
